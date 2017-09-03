@@ -1,0 +1,10 @@
+setwd("C:\\Users\\Bee\\Documents\\Coursera\\01_Data_Science\\04_Exploratory_Data_Analysis\\02_Assignments\\01_Week_1\\01_Data")
+data_full <- read.table("household_power_consumption.txt",sep=";",header = TRUE, na.string = "?")
+data_full$Date <-as.Date(data_full$Date, format="%d/%m/%Y")
+data1 <- subset (data_full,Date >="2007-02-01" & Date <= "2007-02-02")
+datetime<-paste(as.Date(data1$Date),data1$Time)
+data1$Datetime<-as.POSIXct(datetime)
+with(data1,plot(Global_active_power~Datetime, type="l", ylab="Global Active Power (kilowatts)",
+     xlab=""))
+dev.copy(png, file="plot2.png", height=480, width=480)
+dev.off()
